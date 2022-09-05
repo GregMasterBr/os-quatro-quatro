@@ -1,0 +1,8 @@
+.env
+.idea
+venv
+.venv
+*pyc
+.ipynb_checkpoints/
+staticfiles/
+__pycache__
