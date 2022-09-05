@@ -41,7 +41,11 @@ Vinnicyus
 
 import pytest
 
+#Missões:
 # Resolver de 0-10
+# Aumentar a extensividade do algortimo
+# Refirnar
+# Refatorar
 def multiplicacao(x, y): 
     return x*y
 
@@ -49,6 +53,7 @@ def divisao(x, y):
     if y != 0:
         return x/y
     return 0
+
 def soma(x,y):
     return x+y
 
@@ -63,6 +68,7 @@ def fatorial(n=4):
         return 1
     else:
         return fatorial(n-1)*n    
+
 def eh_par(n):
     par = False
     if n%2==0:
@@ -85,11 +91,11 @@ def generate_expression(n):
         express = "(44)"        
     return express
 
-
-
 def gerar_expressao(n):
     if n in [3,4,5,6,10,12,20,28,36,48,60,68,80]:
         return gerar_expressao2(n)
+    elif n in [13,19,21,22,26,27,29,35,56,72,96]:
+        return gerar_expressao3(n)
     else:
         gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4)]
 
@@ -215,6 +221,117 @@ def gerar_expressao2(n):
 
     return escrever_expressão_matematica[index_]
 
+def gerar_expressao3(n):
+    escrever_expressão_matematica=[]
+    consolidacao_de_resultados = []    
+    gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4)]
+    
+    for i in gerador_2_elementos:
+        express= generate_expression(i)  
+        j=4
+        express_2 = 4
+        fat_de_4="(4!)"
+        soma_parcial = soma(i,j)
+        resultado_soma_parcial_soma = soma(soma_parcial,fatorial())        
+        escrever_expressão_matematica.append(f"({express} + {express_2}) + {str(fat_de_4)}")
+        
+        if soma_parcial >= fatorial(): 
+            resultado_soma_parcial_subtracao = subtracao(soma_parcial,fatorial())
+            escrever_expressão_matematica.append(f"({express} + {express_2}) - {str(fat_de_4)}")
+        else:
+            resultado_soma_parcial_subtracao = subtracao(fatorial(),soma_parcial)
+            escrever_expressão_matematica.append(f"{str(fat_de_4)} - ({express} + {express_2})")
+                
+        resultado_soma_parcial_multiplicacao = multiplicacao(soma_parcial,fatorial())
+        escrever_expressão_matematica.append(f"({express} + {express_2}) * {str(fat_de_4)}")        
+        resultado_soma_parcial_divisao = divisao(soma_parcial,fatorial())
+        escrever_expressão_matematica.append(f"({express} + { express_2}) / {str(fat_de_4)}")        
+
+        consolidacao_de_resultados.append(resultado_soma_parcial_soma)            
+        consolidacao_de_resultados.append(resultado_soma_parcial_subtracao)
+        consolidacao_de_resultados.append(resultado_soma_parcial_multiplicacao)
+        consolidacao_de_resultados.append(resultado_soma_parcial_divisao)        
+
+        subtracao_parcial = subtracao(i,j)
+        resultado_subtracao_parcial_soma = soma(subtracao_parcial,fatorial())       
+        escrever_expressão_matematica.append(f"({express} - {express_2}) + {str(fat_de_4)}")        
+        
+        if subtracao_parcial >= fatorial(): 
+            resultado_subtracao_parcial_subtracao = subtracao(subtracao_parcial,fatorial())
+            escrever_expressão_matematica.append(f"({express} - {express_2}) - {str(fat_de_4)}")    
+        else:
+            resultado_subtracao_parcial_subtracao = subtracao(fatorial(),subtracao_parcial)
+            escrever_expressão_matematica.append(f"{str(fat_de_4)} - ({express} - {express_2})")
+        
+        resultado_subtracao_parcial_multiplicacao = multiplicacao(subtracao_parcial,fatorial())
+        escrever_expressão_matematica.append(f"({express} - {express_2}) * {str(fat_de_4)}")        
+        resultado_subtracao_parcial_divisao = divisao(subtracao_parcial,fatorial())
+        escrever_expressão_matematica.append(f"({express} - {express_2}) / {str(fat_de_4)}")        
+
+        consolidacao_de_resultados.append(resultado_subtracao_parcial_soma)            
+        consolidacao_de_resultados.append(resultado_subtracao_parcial_subtracao)
+        consolidacao_de_resultados.append(resultado_subtracao_parcial_multiplicacao)
+        consolidacao_de_resultados.append(resultado_subtracao_parcial_divisao)        
+        
+        multi_parcial = multiplicacao(i,j)
+        resultado_multiplicacao_parcial_soma = soma(multi_parcial,fatorial())
+        escrever_expressão_matematica.append(f"({express} * {express_2}) + {str(fat_de_4)}")        
+        
+        if multi_parcial >= fatorial(): 
+            resultado_multiplicacao_parcial_subtracao = subtracao(multi_parcial,fatorial())
+            escrever_expressão_matematica.append(f"({express} * {express_2}) - {str(fat_de_4)}")     
+        else:
+            resultado_multiplicacao_parcial_subtracao = subtracao(fatorial(),multi_parcial)
+            escrever_expressão_matematica.append(f"{str(fat_de_4)} - ({express} * {express_2})")        
+        
+        resultado_multiplicacao_parcial_multiplicacao = multiplicacao(multi_parcial,fatorial())
+        escrever_expressão_matematica.append(f"({express} * {express_2}) * {str(fat_de_4)}")        
+        resultado_multiplicacao_parcial_divisao = divisao(multi_parcial,fatorial())  
+        escrever_expressão_matematica.append(f"({express} * {express_2}) / {str(fat_de_4)}")        
+        
+        consolidacao_de_resultados.append(resultado_multiplicacao_parcial_soma)
+        consolidacao_de_resultados.append(resultado_multiplicacao_parcial_subtracao)
+        consolidacao_de_resultados.append(resultado_multiplicacao_parcial_multiplicacao)
+        consolidacao_de_resultados.append(resultado_multiplicacao_parcial_divisao)  
+        
+        divisao_parcial= divisao(i,j) 
+        resultado_divisao_parcial_soma = soma(divisao_parcial,fatorial())
+        escrever_expressão_matematica.append(f"({express} / {express_2}) + {str(fat_de_4)}")        
+        
+        if divisao_parcial >= fatorial(): 
+            resultado_divisao_parcial_subtracao = subtracao(divisao_parcial,fatorial())
+            escrever_expressão_matematica.append(f"({express} / {express_2}) - {str(fat_de_4)}")   
+        else:
+            resultado_divisao_parcial_subtracao = subtracao(fatorial(),divisao_parcial)
+            escrever_expressão_matematica.append(f"{str(fat_de_4)} - ({express} / {express_2})") 
+        
+        resultado_divisao_parcial_multiplicacao = multiplicacao(divisao_parcial,fatorial())
+        escrever_expressão_matematica.append(f"({express} / {express_2}) * {str(fat_de_4)}")        
+        resultado_divisao_parcial_divisao = divisao(divisao_parcial,fatorial()) 
+        escrever_expressão_matematica.append(f"({express} / {express_2}) / {str(fat_de_4)}")        
+                       
+        consolidacao_de_resultados.append(resultado_divisao_parcial_soma)
+        consolidacao_de_resultados.append(resultado_divisao_parcial_subtracao)
+        consolidacao_de_resultados.append(resultado_divisao_parcial_multiplicacao)
+        consolidacao_de_resultados.append(resultado_divisao_parcial_divisao)  
+
+  
+        
+    print(consolidacao_de_resultados)
+    print("***"*10)
+    print(escrever_expressão_matematica)
+    print("***"*10)
+    index_ = -1
+    if (n in consolidacao_de_resultados):
+        index_ =consolidacao_de_resultados.index(n)
+        print(f"Achou o {n} no indice {index_}")    
+
+        print(escrever_expressão_matematica[index_])
+    else:
+        print(f"Não Achou o {n}")
+
+    return escrever_expressão_matematica[index_]
+
 def test_resultado_0():
     assert gerar_expressao(0) == "(4+4)-(4+4)"
 
@@ -250,6 +367,9 @@ def test_resultado_10():
 def test_resultado_12():
    assert gerar_expressao(12) == "((44) + 4) / 4" 
 
+def test_resultado_13():
+    assert gerar_expressao(13) == "(4!) - ((44) / 4)"
+
 def test_resultado_15():
    assert gerar_expressao(15) == "(4*4)-(4/4)"   
     
@@ -258,18 +378,39 @@ def test_resultado_16():
 
 def test_resultado_17():
    assert gerar_expressao(17) == "(4*4)+(4/4)"       
-    
+
+def test_resultado_19():
+    assert gerar_expressao(19) == "(4!) - ((4/4) + 4)"
+
 def test_resultado_20():
    assert gerar_expressao(20) == "((4/4) + 4) * 4" 
-    
+
+def test_resultado_21():
+    assert gerar_expressao(21) == "((4/4) - 4) + (4!)"
+
+def test_resultado_22():
+    assert gerar_expressao(22) == "(4!) - ((4+4) / 4)"
+
 def test_resultado_24():
    assert gerar_expressao(24) == "(4+4)+(4*4)"  
-    
+
+def test_resultado_26():
+    assert gerar_expressao(26) == "((4+4) / 4) + (4!)"
+
+def test_resultado_27():
+   assert gerar_expressao(27) == "(4!) - ((4/4) - 4)"       
+
 def test_resultado_28():
    assert gerar_expressao(28) == "((4+4) * 4) - 4"  
 
+def test_resultado_29():
+   assert gerar_expressao(29) == "((4/4) + 4) + (4!)"  
+
 def test_resultado_32():
    assert gerar_expressao(32) == "(4*4)+(4*4)"       
+
+def test_resultado_35():
+    assert gerar_expressao(35) == "((44) / 4) + (4!)"   
 
 def test_resultado_36():
    assert gerar_expressao(36) == "((4+4) * 4) + 4"
@@ -289,20 +430,31 @@ def test_resultado_48():
 def test_resultado_52():
    assert gerar_expressao(52) == "(4+4)+(44)"
 
+def test_resultado_56():
+    assert gerar_expressao(56) == "((4+4) * 4) + (4!)"
+
 def test_resultado_60():
    assert gerar_expressao(60) == "((4*4) * 4) - 4"  
+
 def test_resultado_64():
    assert gerar_expressao(64) == "(4+4)*(4+4)"    
 
 def test_resultado_68():
    assert gerar_expressao(68) == "((4*4) * 4) + 4"  
 
+def test_resultado_72():
+    assert gerar_expressao(72) == "((44) + 4) + (4!)"
+
 def test_resultado_80():
     assert gerar_expressao(80) == "((4*4) + 4) * 4"  
 
 def test_resultado_88():
     assert gerar_expressao(88) == "(44)+(44)"
-    
+
+def test_resultado_96():
+    assert gerar_expressao(96) == "((4+4) - 4) * (4!)"
+
+
 if __name__ == "__main__":
     pytest.main(['-svv', __file__])
 
