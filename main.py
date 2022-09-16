@@ -104,12 +104,14 @@ def generate_expression(n):
         express = "(4!)"    
     elif n==44:
         express = "(44)"     
+    elif n==100:
+        express = "(4?*4?)"       
     elif n==256:
         express = "(4**4)"                
     return express
 
 def gerar_expressao(n):
-    if n in [3,4,5,6,10,12,20,28,36,48,60,68,76,80,84]:
+    if n in [3,4,5,6,10,12,20,28,36,48,60,68,76,80,84,92,100]:
         return gerar_expressao2(n)
     elif n in [13,19,21,22,26,27,29,35,56,72,96]:
         return gerar_expressao3(n)
@@ -159,7 +161,7 @@ def gerar_expressao(n):
 def gerar_expressao2(n):
     escrever_expressão_matematica=[]
     consolidacao_de_resultados = []    
-    gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4),soma(num_terminal(4),num_terminal(4))]
+    gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4),soma(num_terminal(4),num_terminal(4)),multiplicacao(num_terminal(4),num_terminal(4))]
     
     for i in gerador_2_elementos:
         express= generate_expression(i)  
@@ -842,9 +844,14 @@ def test_resultado_84():
 def test_resultado_88():
     assert gerar_expressao(88) == "(44)+(44)"
 
+def test_resultado_92():
+    assert gerar_expressao(92) == "((4?*4?) - 4) - 4"
+
 def test_resultado_96():
     assert gerar_expressao(96) == "((4+4) - 4) * (4!)"
 
+def test_resultado_100():
+    assert gerar_expressao(100) == "((4?*4?) + 4) - 4"
 
 if __name__ == "__main__":
     pytest.main(['-svv', __file__])
