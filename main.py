@@ -86,6 +86,7 @@ def num_terminal(terminal=4,soma=0):
         return soma
     else:
         return num_terminal(terminal-1,soma+terminal)      
+
 def generate_expression(n):
     express=""
     if n==0:
@@ -113,14 +114,14 @@ def generate_expression(n):
 def gerar_expressao(n):
     if n in [3,4,5,6,10,12,20,28,36,48,60,68,76,80,84,92,100]:
         return gerar_expressao2(n)
-    elif n in [13,19,21,22,26,27,29,35,56,72,96]:
+    elif n in [13,19,21,22,26,27,29,35,49,56,72,96]:
         return gerar_expressao3(n)
-    elif n in [14,30,34,38,42,62,66]:
+    elif n in [14,18,23,30,34,38,42,46,62,66,78,82,94,98]:
         return gerar_expressao4(n)      
     elif n in [40,50,54,74 ]:
         return gerar_expressao5(n)     
     else:
-        gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4)]
+        gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4),soma(num_terminal(4),num_terminal(4)),multiplicacao(num_terminal(4),num_terminal(4))]
         
         escrever_expressão_matematica=[]
         consolidacao_de_resultados = []
@@ -246,7 +247,7 @@ def gerar_expressao2(n):
 def gerar_expressao3(n):
     escrever_expressão_matematica=[]
     consolidacao_de_resultados = []    
-    gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4)]
+    gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4),soma(num_terminal(4),num_terminal(4)),multiplicacao(num_terminal(4),num_terminal(4))]
     
     for i in gerador_2_elementos:
         express= generate_expression(i)  
@@ -357,7 +358,7 @@ def gerar_expressao3(n):
 def gerar_expressao4(n):
     escrever_expressão_matematica=[]
     consolidacao_de_resultados = []    
-    gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4)]
+    gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4),soma(num_terminal(4),num_terminal(4)),multiplicacao(num_terminal(4),num_terminal(4))]
     
     for i in gerador_2_elementos:
         express= generate_expression(i)  
@@ -736,6 +737,9 @@ def test_resultado_16():
 def test_resultado_17():
    assert gerar_expressao(17) == "(4*4)+(4/4)"       
 
+def test_resultado_18():
+   assert gerar_expressao(18) == "((4*4) + 4) - (√4)"       
+
 def test_resultado_19():
     assert gerar_expressao(19) == "(4!) - ((4/4) + 4)"
 
@@ -747,6 +751,9 @@ def test_resultado_21():
 
 def test_resultado_22():
     assert gerar_expressao(22) == "(4!) - ((4+4) / 4)"
+
+def test_resultado_23():
+   assert gerar_expressao(23) == "((4?*4?) / 4) - (√4)"       
 
 def test_resultado_24():
    assert gerar_expressao(24) == "(4+4)+(4*4)"  
@@ -796,8 +803,14 @@ def test_resultado_44():
 def test_resultado_45():
    assert gerar_expressao(45) == "(4/4)+(44)"    
 
+def test_resultado_46():
+   assert gerar_expressao(46) == "((44) + 4) - (√4)"       
+
 def test_resultado_48():
    assert gerar_expressao(48) == "((4+4) + 4) * 4"
+
+def test_resultado_49():
+   assert gerar_expressao(49) == "((4?*4?) / 4) + (4!)"
 
 def test_resultado_50():
     assert gerar_expressao(50) == "((4/4) + 4) * (4?)"
@@ -835,8 +848,14 @@ def test_resultado_74():
 def test_resultado_76():
     assert gerar_expressao(76) == "((4?+4?) * 4) - 4"
 
+def test_resultado_78():
+   assert gerar_expressao(78) == "((4?+4?) * 4) - (√4)"       
+
 def test_resultado_80():
     assert gerar_expressao(80) == "((4*4) + 4) * 4"  
+
+def test_resultado_82():
+   assert gerar_expressao(82) == "((4?+4?) * 4) + (√4)"       
 
 def test_resultado_84():
     assert gerar_expressao(84) == "((4?+4?) * 4) + 4"
@@ -847,8 +866,17 @@ def test_resultado_88():
 def test_resultado_92():
     assert gerar_expressao(92) == "((4?*4?) - 4) - 4"
 
+def test_resultado_94():
+   assert gerar_expressao(94) == "((4?*4?) - 4) - (√4)"       
+
 def test_resultado_96():
     assert gerar_expressao(96) == "((4+4) - 4) * (4!)"
+
+def test_resultado_98():
+   assert gerar_expressao(98) == "((4?*4?) - 4) + (√4)"  
+
+def test_resultado_99():
+    assert gerar_expressao(99) == "(4?*4?)-(4/4)"
 
 def test_resultado_100():
     assert gerar_expressao(100) == "((4?*4?) + 4) - 4"
