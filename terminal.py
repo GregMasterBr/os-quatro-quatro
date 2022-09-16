@@ -12,6 +12,8 @@ def fatorial(n=4):
         return fatorial(n-1)*n  
 
 if __name__ == "__main__":
-    print(num_terminal(4))
-    print(num_terminal(10))
-    print(fatorial())
+    #print(num_terminal(4))
+    #print(num_terminal(10))
+    print(num_terminal(8))
+    print(num_terminal(16))
+    #print(fatorial())

@@ -98,8 +98,10 @@ def generate_expression(n):
         express = "(Sqrt(4))"        
     elif n==16:
         express = "(4*4)"
+    elif n==20:
+        express = "(4?+4?)"     
     elif n==24:
-        express = "(4!)"        
+        express = "(4!)"    
     elif n==44:
         express = "(44)"     
     elif n==256:
@@ -107,7 +109,7 @@ def generate_expression(n):
     return express
 
 def gerar_expressao(n):
-    if n in [3,4,5,6,10,12,20,28,36,48,60,68,80]:
+    if n in [3,4,5,6,10,12,20,28,36,48,60,68,76,80,84]:
         return gerar_expressao2(n)
     elif n in [13,19,21,22,26,27,29,35,56,72,96]:
         return gerar_expressao3(n)
@@ -157,7 +159,7 @@ def gerar_expressao(n):
 def gerar_expressao2(n):
     escrever_expressão_matematica=[]
     consolidacao_de_resultados = []    
-    gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4)]
+    gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4),soma(num_terminal(4),num_terminal(4))]
     
     for i in gerador_2_elementos:
         express= generate_expression(i)  
@@ -171,7 +173,8 @@ def gerar_expressao2(n):
         resultado_soma_parcial_multiplicacao = multiplicacao(soma_parcial,j)
         escrever_expressão_matematica.append(f"({express} + {express_2}) * {str(j)}")        
         resultado_soma_parcial_divisao = divisao(soma_parcial,j)
-        escrever_expressão_matematica.append(f"({express} + { express_2}) / {str(j)}")        
+        escrever_expressão_matematica.append(f"({express} + { express_2}) / {str(j)}")    
+            
 
         consolidacao_de_resultados.append(resultado_soma_parcial_soma)            
         consolidacao_de_resultados.append(resultado_soma_parcial_subtracao)
@@ -827,8 +830,14 @@ def test_resultado_72():
 def test_resultado_74():
     assert gerar_expressao(74) == "((4*4) * 4) + (4?)"
 
+def test_resultado_76():
+    assert gerar_expressao(76) == "((4?+4?) * 4) - 4"
+
 def test_resultado_80():
     assert gerar_expressao(80) == "((4*4) + 4) * 4"  
+
+def test_resultado_84():
+    assert gerar_expressao(84) == "((4?+4?) * 4) + 4"
 
 def test_resultado_88():
     assert gerar_expressao(88) == "(44)+(44)"
