@@ -92,9 +92,9 @@ def generate_expression(n):
     return express
 
 def gerar_expressao(n):
-    if n in [3,4,5,6,10,12,13,14,18,19,20,21,22,23,25,26,27,28,29,30,31,33,34,35,36,38,40,42,46,47,48,49,50,51,54,55,56,58,60,62,66,68,70,72,74,76,78,80,82,84,86,90,92,94,96,98,100]:
+    if n in [3,4,5,6,10,11,12,13,14,18,19,20,21,22,23,25,26,27,28,29,30,31,33,34,35,36,38,40,42,46,47,48,49,50,51,54,55,56,58,60,62,66,68,70,72,74,76,78,80,82,84,86,90,92,94,96,98,100]:
         return gerar_expressao2(n)    
-    elif n in [37,39,41,53,57,59,61,63,65,67,69,71,73,75,77,79,81,83,85,87,89,91,93,95,97]:
+    elif n in [39,41,53,57,59,61,63,65,67,69,71,73,75,77,79,81,83,85,87,89,91,93,95,97]:
         return gerar_expressao3(n) 
     else:
         gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4),soma(num_terminal(4),num_terminal(4)),multiplicacao(num_terminal(4),num_terminal(4))]
@@ -108,8 +108,15 @@ def gerar_expressao(n):
                 express_2=generate_expression(j)
                 soma_ = soma(i,j)
                 escrever_expressão_matematica.append(f"{express +'+'+ express_2}")
-                sub_ = subtracao(i,j)
-                escrever_expressão_matematica.append(f"{express +'-'+ express_2}")            
+                if (i>j):
+                    sub_ = subtracao(i,j)         
+                    escrever_expressão_matematica.append(f"{express +'-'+ express_2}")            
+                     
+                else:
+                    sub_ = subtracao(j,i)
+                    escrever_expressão_matematica.append(f"{express_2 +'-'+ express}")            
+
+                #escrever_expressão_matematica.append(f"{express +'-'+ express_2}")            
                 multi_= multiplicacao(i,j)
                 escrever_expressão_matematica.append(f"{express +'*'+ express_2}")
                 divisao_= divisao(i,j)            
@@ -287,7 +294,7 @@ def test_resultado_10():
    assert gerar_expressao(10) == "((4+4) + 4) - (√4)" #"((4-4) * (4?)) + (4?)" #"((44) - 4) / 4" 
 
 def test_resultado_11():
-   assert gerar_expressao(11) == "(4?*4?)/(4?*4?)" 
+   assert gerar_expressao(11) == "(4?) - ((4/4) - (√4))" 
 
 def test_resultado_12():
    assert gerar_expressao(12) == "(4!) - ((4+4) + 4)"#"((4+4) + (√4)) + (√4)" #"((44) + 4) / 4" 
@@ -555,6 +562,10 @@ def test_resultado_99():
 
 def test_resultado_100():
     assert gerar_expressao(100) == "((4+4) + (√4)) * (4?)" #"((4-4) + (4?)) * (4?)" #"((4?*4?) + 4) - 4"
+
+# def test_resultado_0000():
+#     assert gerar_expressao(0) == "" 
+
 
 if __name__ == "__main__":
     pytest.main(['-svv', __file__])
