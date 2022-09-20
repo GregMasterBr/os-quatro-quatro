@@ -304,7 +304,7 @@ def gerar_expressao3(n):
 
     return escrever_expressão_matematica[index_]
 
-'''
+
 def test_resultado_0():
     assert gerar_expressao(0) == "(4+4)-(4+4)"
 
@@ -553,10 +553,10 @@ def test_resultado_81():
 
 def test_resultado_82():
    assert gerar_expressao(82) == "((4+4) * (4?)) + (√4)" #"((4?+4?) * 4) + (√4)"       
-'''
+
 def test_resultado_83():
     assert gerar_expressao(83) == "(4?)? + ((4! + √4) + √4)"
-'''
+
 def test_resultado_84():
     assert gerar_expressao(84) == "((4+4) * (4?)) + 4" #"((44) - (√4)) * (√4)" #"((4?+4?) * 4) + 4"
 
@@ -577,16 +577,16 @@ def test_resultado_89():
 
 def test_resultado_90():
     assert gerar_expressao(90) == "((4+4) * (4?)) + (4?)"
-'''
+
 def test_resultado_91():
     assert gerar_expressao(91) == "(4?)? + ((4? * 4) - 4)"
-'''
+
 def test_resultado_92():
     assert gerar_expressao(92) == "((44) + (4!)) + (4!)" #"((4?*4?) - 4) - 4"
-'''
+
 def test_resultado_93():
     assert gerar_expressao(93) == "(4?)? + ((4! + 4!) - 4?)"
-'''
+
 def test_resultado_94():
    assert gerar_expressao(94) == "(4?)? - ((4*4) - (4?)?)" #"((4?*4?) - 4) - (√4)"       
 
@@ -608,7 +608,7 @@ def test_resultado_99():
 def test_resultado_100():
     assert gerar_expressao(100) == "((4+4) + (√4)) * (4?)" #"((4-4) + (4?)) * (4?)" #"((4?*4?) + 4) - 4"
 
-'''
+
 
 if __name__ == "__main__":
     pytest.main(['-svv', __file__])
