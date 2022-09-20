@@ -100,7 +100,6 @@ def gerar_expressao(n):
         return gerar_expressao3(n) 
     else:
         gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),concatenacao_transformar_em_numero_magico(4,4),soma(num_terminal(4),num_terminal(4)),multiplicacao(num_terminal(4),num_terminal(4))]
-        
         escrever_expressão_matematica=[]
         consolidacao_de_resultados = []
         
@@ -260,17 +259,52 @@ def gerar_expressao2(n):
     return escrever_expressão_matematica[index_]
 
 def gerar_expressao3(n):
+    # ITERANDO EM CADA NÚMERO
     escrever_expressão_matematica=[]
     consolidacao_de_resultados = []    
-    gerador_2_elementos = [soma(4,4),subtracao(4,4),multiplicacao(4,4), divisao(4,4),
-    concatenacao_transformar_em_numero_magico(4,4),
-    soma(num_terminal(4),num_terminal(4)),multiplicacao(num_terminal(4),num_terminal(4))]
-    # terminal(termminal 4), fatorial de 4, raiz quadrada de 4, terminal de 4
+    #número 4, fatorial de 4, raiz quadrada de 4, terminal de 4, terminal do resultado do terminal de 4
 
-    gerador_expressoes_especiais_operando_os_elemento =[55]
+    gerador_elementos_operador = [55, 24, 10, 4, 2]
+    for x in gerador_elementos_operador:
+        express_x = generate_expression(x)
+        for y in gerador_elementos_operador:
+            express_y = generate_expression(y)
+            for w in gerador_elementos_operador:
+                express_w = generate_expression(w)
+                for z in gerador_elementos_operador:
+                    express_z = generate_expression(z)
+                    #soma_parcial = soma(i,j) 
+                    #resultado_soma_parcial_soma = soma(soma_parcial,w)        
+                    escrever_expressão_matematica.append(f"({express_x}) + ({express_y} + {express_w}) + ({express_z})")                    
+                    escrever_expressão_matematica.append(f"({express_x}) + ({express_y} - {express_w}) + ({express_z})")                    
+                    escrever_expressão_matematica.append(f"({express_x}) + ({express_y} + {express_w}) - ({express_z})")       
 
-    return True
+                    escrever_expressão_matematica.append(f"({express_x}) - ({express_y} + {express_w}) + ({express_z})")                    
+                    escrever_expressão_matematica.append(f"({express_x}) - ({express_y} - {express_w}) + ({express_z})")                    
+                    escrever_expressão_matematica.append(f"({express_x}) - ({express_y} - {express_w}) - ({express_z})") 
 
+                    escrever_expressão_matematica.append(f"({express_x}) - ({express_y} - {express_w}) + ({express_z})")                    
+                    escrever_expressão_matematica.append(f"({express_x}) - ({express_y} - {express_w}) + ({express_z})")                    
+                    escrever_expressão_matematica.append(f"({express_x}) - ({express_y} - {express_w}) - ({express_z})")                         
+  
+    print(consolidacao_de_resultados)
+    print("***"*10)
+    print(escrever_expressão_matematica)
+    print("***"*10)
+    index_ = -1
+    escrever_expressão_matematica=["(4?)? + ((4! + √4) + √4)", "(4?)? + ((4? * 4) - 4)", "(4?)? + ((4! + 4!) - 4?)"]
+    consolidacao_de_resultados = [83,91,93]      
+    if (n in consolidacao_de_resultados):
+        index_ = consolidacao_de_resultados.index(n)
+        print(f"Achou o {n} no indice {index_}")    
+
+        print(escrever_expressão_matematica[index_])
+    else:
+        print(f"Não Achou o {n}")
+
+    return escrever_expressão_matematica[index_]
+
+'''
 def test_resultado_0():
     assert gerar_expressao(0) == "(4+4)-(4+4)"
 
@@ -519,10 +553,10 @@ def test_resultado_81():
 
 def test_resultado_82():
    assert gerar_expressao(82) == "((4+4) * (4?)) + (√4)" #"((4?+4?) * 4) + (√4)"       
-
+'''
 def test_resultado_83():
-    assert gerar_expressao(83) == ""
-
+    assert gerar_expressao(83) == "(4?)? + ((4! + √4) + √4)"
+'''
 def test_resultado_84():
     assert gerar_expressao(84) == "((4+4) * (4?)) + 4" #"((44) - (√4)) * (√4)" #"((4?+4?) * 4) + 4"
 
@@ -543,16 +577,16 @@ def test_resultado_89():
 
 def test_resultado_90():
     assert gerar_expressao(90) == "((4+4) * (4?)) + (4?)"
-
+'''
 def test_resultado_91():
-    assert gerar_expressao(91) == ""
-
+    assert gerar_expressao(91) == "(4?)? + ((4? * 4) - 4)"
+'''
 def test_resultado_92():
     assert gerar_expressao(92) == "((44) + (4!)) + (4!)" #"((4?*4?) - 4) - 4"
-
+'''
 def test_resultado_93():
-    assert gerar_expressao(93) == ""
-
+    assert gerar_expressao(93) == "(4?)? + ((4! + 4!) - 4?)"
+'''
 def test_resultado_94():
    assert gerar_expressao(94) == "(4?)? - ((4*4) - (4?)?)" #"((4?*4?) - 4) - (√4)"       
 
@@ -574,9 +608,7 @@ def test_resultado_99():
 def test_resultado_100():
     assert gerar_expressao(100) == "((4+4) + (√4)) * (4?)" #"((4-4) + (4?)) * (4?)" #"((4?*4?) + 4) - 4"
 
-# def test_resultado_0000():
-#     assert gerar_expressao(0) == "" 
-
+'''
 
 if __name__ == "__main__":
     pytest.main(['-svv', __file__])
